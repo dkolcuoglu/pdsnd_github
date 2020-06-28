@@ -16,19 +16,18 @@ def get_filters():
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
     print('Hello! Let\'s explore some US bikeshare data!')
-    # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
+
     while(True): 
         city=input("Please enter a city name ").lower()
         if city =="chicago" or city=="new york city" or city =="washington":
             break
 
-    # TO DO: get user input for month (all, january, february, ... , june)
     while(True): 
         month=input("Please enter a month ").lower()
         if month in ["all", "january", "february","march","april","may","june"]:
             break
 
-    # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
+ 
     while(True): 
         day=input("Please enter a day ").lower()
         if day in ["all", "monday", "tuesday","wednesday","thursday","friday","saturday","sunday"]:
@@ -86,7 +85,7 @@ def time_stats(df):
 
     print('\nCalculating The Most Frequent Times of Travel...\n')
 
-    # TO DO: display the most common month
+    
     def get_key_d(val): 
                 for key, value in daydict.items(): 
                      if val == value: 
@@ -110,13 +109,7 @@ def time_stats(df):
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
-    # TO DO: display the most common month
 
-
-    # TO DO: display the most common day of week
-
-
-    # TO DO: display the most common start hour
 
 
     print("\nThis took %s seconds." % (time.time() - start_time))
