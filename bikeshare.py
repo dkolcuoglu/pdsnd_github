@@ -16,20 +16,19 @@ def get_filters():
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
     print('Hello! Let\'s explore some US bikeshare data!')
-    
-    while(True): 
+
+    while(True):
         city=input("Please enter a city name ").lower()
         if city =="chicago" or city=="new york city" or city =="washington":
             break
 
-  
-    while(True): 
+    while(True):
         month=input("Please enter a month ").lower()
         if month in ["all", "january", "february","march","april","may","june"]:
             break
 
-   
-    while(True): 
+
+    while(True):
         day=input("Please enter a day ").lower()
         if day in ["all", "monday", "tuesday","wednesday","thursday","friday","saturday","sunday"]:
             break
@@ -49,13 +48,13 @@ def load_data(city, month, day):
     Returns:
         df - Pandas DataFrame containing city data filtered by month and day
     """
-    import pandas as pd 
-    if city=="chicago" or city=="washington": 
+    import pandas as pd
+    if city=="chicago" or city=="washington":
         df=pd.read_csv(city+".csv",index_col=0)
     elif  city=="new york city":
         df=pd.read_csv(city.replace(" ","_")+".csv",index_col=0)
-        
-    
+
+
     import datetime as dt
     monthdict={"all":-1,"january":1,"february":2,"march":3,"april":4,"may":5,"june":6}
     daydict={"all":-1,"monday":0,"tuesday":1,"wednesday":2,"thursday":3,"friday":4,"saturday":5,"sunday":6}
@@ -67,7 +66,7 @@ def load_data(city, month, day):
         b=a[pd.to_datetime(a["Start Time"]).dt.weekday==daydict[day]]
     else:
         b=a
-    
+
 
     return b
 
@@ -79,26 +78,26 @@ def time_stats(df):
     start_time = time.time()
 
     import datetime as dt
-    import pandas as pd 
+    import pandas as pd
     monthdict={"all":-1,"january":1,"february":2,"march":3,"april":4,"may":5,"june":6}
     daydict={"all":-1,"monday":0,"tuesday":1,"wednesday":2,"thursday":3,"friday":4,"saturday":5,"sunday":6}
     """Displays statistics on the most frequent times of travel."""
 
     print('\nCalculating The Most Frequent Times of Travel...\n')
 
-    # TO DO: display the most common month
-    def get_key_d(val): 
-                for key, value in daydict.items(): 
-                     if val == value: 
-                        return key 
+
+    def get_key_d(val):
+                for key, value in daydict.items():
+                     if val == value:
+                        return key
 
                 return "key doesn't exist"
     print("Most common day is",get_key_d(pd.to_datetime(df["Start Time"]).dt.weekday.value_counts().index[0]))
 
-    def get_key_m(val): 
-        for key, value in monthdict.items(): 
-             if val == value: 
-                return key 
+    def get_key_m(val):
+        for key, value in monthdict.items():
+             if val == value:
+                return key
 
         return "key doesn't exist"
     print("Most common month is",get_key_m(pd.to_datetime(df["Start Time"]).dt.month.value_counts().index[0]))
@@ -110,13 +109,7 @@ def time_stats(df):
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
-    # TO DO: display the most common month
 
-
-    # TO DO: display the most common day of week
-
-
-    # TO DO: display the most common start hour
 
 
     print("\nThis took %s seconds." % (time.time() - start_time))
@@ -147,7 +140,7 @@ def station_stats(df):
 
 def trip_duration_stats(df):
     """Displays statistics on the total and average trip duration."""
-    import time 
+    import time
     print('\nCalculating Trip Duration...\n')
     start_time = time.time()
 
@@ -171,19 +164,19 @@ def user_stats(df):
     print("Counts of User Types:")
     print(df["User Type"].value_counts())
     print('-'*10)
-    
+
     # TO DO: Display earliest, most recent, and most common year of birth
-    try: 
+    try:
         print("Earliest year is ",df["Birth Year"].min())
         print("Most recent year is ",df["Birth Year"].max())
         print("Most common year is ",df["Birth Year"].value_counts().index[0])
-    except: 
+    except:
         print("Birth Year is not available with selected filters !! ")
     print('-'*10)
 
 
     # TO DO: Display counts of gender
-    try: 
+    try:
         print("Counts of Genders:")
         print(df["Gender"].value_counts())
     except:
@@ -199,13 +192,13 @@ def main():
         df = load_data(city, month, day)
         start=0
         end=5
-        while True : 
+        while True :
             showmore=input('\nWould you like to see 5 row from filtered data? Enter yes or no.\n')
             if showmore.lower()=="yes":
                 print(df[start:end])
             elif showmore.lower()=="no":
                 break
-            else: 
+            else:
                 print("Incorrectly entered input,Please enter yes or no.")
             start=start+5
             end=end+5
